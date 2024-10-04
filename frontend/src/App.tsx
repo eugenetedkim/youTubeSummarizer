@@ -24,18 +24,36 @@ const App: React.FC = () => {
         throw new Error('Network response was not ok');
       }
 
-      const responseData = await response.json(); // Parse response JSON
+      const responseData = await response.json();
       console.log(responseData);
-      const summary = responseData['summary']['message']['content'];
-      const arrayOfSummaryBulletPoints = summary.split('- ');
-      arrayOfSummaryBulletPoints.shift();
-      const rec = arrayOfSummaryBulletPoints.pop();
 
-      setArrayOfSummaryBulletPoints(arrayOfSummaryBulletPoints);
-      setRec(rec);
+      if (responseData.summary) {
+        const summaryLines = responseData.summary.split('\n').filter((line: string) => line.trim() !== '');
+        
+        // Find the index where the recommendation starts
+        const recIndex = summaryLines.findIndex((line: string) => line.toLowerCase().includes('recommended action'));
+        
+        if (recIndex !== -1) {
+          // Separate bullet points and recommendation
+          const bulletPoints = summaryLines.slice(0, recIndex);
+          const recommendation = summaryLines.slice(recIndex).join('\n');
+
+          setArrayOfSummaryBulletPoints(bulletPoints);
+          setRec(recommendation);
+        } else {
+          // If no recommendation found, treat all as bullet points
+          setArrayOfSummaryBulletPoints(summaryLines);
+          setRec('');
+        }
+      } else {
+        setArrayOfSummaryBulletPoints([]);
+        setRec('No summary available');
+      }
 
     } catch (error) {
       console.error('Error:', error);
+      setArrayOfSummaryBulletPoints([]);
+      setRec('Error processing request');
     }
   };
 
@@ -49,7 +67,7 @@ const App: React.FC = () => {
           onSubmit={handleSubmit}
         />
       </header>
-      <p>{rec}</p>
+      {rec && <p><strong>Recommendation:</strong> {rec}</p>}
       <ul>
         {arrayOfSummaryBulletPoints.map((summaryBulletPoint, index) => (
           <li key={index}>{summaryBulletPoint}</li>
