@@ -14,6 +14,13 @@ node_modules/
 !/backend/recordings/.gitkeep
 /backend/venv/
 
+# Ignore generated files in backend
+/backend/*.json
+/backend/*.srt
+/backend/*.tsv
+/backend/*.txt
+/backend/*.vtt
+
 # Environment variables (relevant for both frontend and backend)
 .env
 .env.local
@@ -29,5 +36,8 @@ yarn-error.log*
 # OS generated files
 .DS_Store
 
-
-
+# IDE/Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
