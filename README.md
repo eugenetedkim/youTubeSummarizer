@@ -1,4 +1,4 @@
-# YouTube Summarizer
+# YouTubeSummarizer
 
 This project is a YouTube video summarizer that transcribes and summarizes YouTube videos using Whisper for transcription and OpenAI's GPT for summarization.
 
@@ -18,8 +18,8 @@ This project is a YouTube video summarizer that transcribes and summarizes YouTu
 
 1. Clone this repository:
    ```
-   git clone https://github.com/your-username/youtube-summarizer.git
-   cd youtube-summarizer
+   git clone https://github.com/eugenetedkim/youTubeSummarizer.git
+   cd youTubeSummarizer
    ```
 
 2. Run the appropriate setup script for your operating system:
