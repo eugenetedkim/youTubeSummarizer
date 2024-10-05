@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# YouTube Summarizer Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend application for the YouTube Summarizer project. It provides a user interface for interacting with the YouTube video summarization features.
 
-## Available Scripts
+## Project Setup
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), providing a solid foundation for React development.
+
+### Prerequisites
+
+- Node.js (version 14 or later)
+- npm (usually comes with Node.js)
+
+### Installation
+
+1. Navigate to the frontend directory:
+   ```
+   cd path/to/youTubeSummarizer/frontend
+   ```
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+## Running the Application
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Runs the app in development mode.
+- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- The page will automatically reload if you make edits.
+- You will see any lint errors in the console.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Development Workflow
 
-### `npm test`
+1. Start the development server with `npm start`.
+2. Make changes to the React components in the `src` directory.
+3. Test your changes locally in the browser.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+- `src/`: Contains all React source code
+  - `components/`: React components (e.g., `TextInput.tsx`)
+  - `App.tsx`: Main application component
+  - `index.tsx`: Entry point of the React application
+- `public/`: Static files like HTML and images
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Connecting to Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The backend server is configured to run on `http://localhost:5000` by default.
+- Ensure the backend server is running before starting the frontend application.
+- If you need to change the backend URL, update it in `src/App.tsx` where the fetch request is made.
+- Double-check the port number in the backend's `server.ts` file if you're unsure about the correct port.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Input field for YouTube URL submission
+- Display of summarized content from the backend
+- Error handling for invalid inputs or backend issues
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React documentation](https://reactjs.org/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Ensure all dependencies are installed (`npm install`)
+2. Clear npm cache (`npm cache clean --force`)
+3. Ensure the backend server is running and accessible
+4. Check the browser console and terminal for any error messages
+5. Verify that the backend URL in `App.tsx` matches your backend server address and port
+6. If changing ports, make sure to update both the backend `server.ts` and frontend `App.tsx` files
+
+For any persistent problems, please open an issue in the project repository.
+
+## Contributing
+
+Contributions to improve the frontend are welcome. Please ensure to follow the existing code style and add unit tests for any new features.
