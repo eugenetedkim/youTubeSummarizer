@@ -13,6 +13,7 @@ This project is a YouTube video summarizer that transcribes and summarizes YouTu
 - Node.js (v14 or later)
 - Python 3.9 or later
 - Git
+- OpenAI API key
 
 ## Setup Instructions
 
@@ -22,47 +23,37 @@ This project is a YouTube video summarizer that transcribes and summarizes YouTu
    cd youTubeSummarizer
    ```
 
-2. Set up the backend:
-   ```
-   cd backend
-   npm install
-   ```
+2. Run the appropriate setup script for your operating system:
 
-3. Create and activate a Python virtual environment:
-   
    For Mac/Linux:
    ```
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-   
-   For Windows:
-   ```
-   python -m venv venv
-   .\venv\Scripts\activate
+   chmod +x setup/mac_setup.sh
+   ./setup/mac_setup.sh
    ```
 
-4. Install Python dependencies:
+   For Windows (run in Command Prompt as Administrator):
    ```
-   pip install -r requirements.txt
-   ```
-
-5. Create a `.env` file in the `backend` directory with your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_api_key_here
+   setup\windows_setup.bat
    ```
 
-6. Set up the frontend:
-   ```
-   cd ../frontend
-   npm install
-   ```
+   These scripts will set up both the backend and frontend environments.
+
+3. Set up your OpenAI API key:
+   - Go to https://platform.openai.com/signup to create an OpenAI account if you don't have one.
+   - Once logged in, navigate to https://platform.openai.com/api-keys
+   - Click on "Create new secret key" and copy the generated key.
+   - Create a `.env` file in the `backend` directory and add your API key:
+     ```
+     OPENAI_API_KEY=your_api_key_here
+     ```
+   - Note: OpenAI API usage is not free. Ensure you've set up billing in your OpenAI account settings.
 
 ## Running the Application
 
 1. Start the backend server:
    ```
    cd backend
+   source venv/bin/activate  # For Windows: .\venv\Scripts\activate
    npm run build
    npm start
    ```
@@ -89,6 +80,7 @@ If you encounter any issues during setup or usage, please check the following:
 1. Ensure all prerequisites are installed correctly.
 2. Make sure you've activated the virtual environment before running the backend.
 3. Check that your OpenAI API key is correctly set in the `.env` file.
+4. Verify that your OpenAI account has billing set up and sufficient credits.
 
 For any other issues, please open an issue on this GitHub repository.
 
@@ -98,4 +90,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is currently not licensed under any specific open-source license. All rights are reserved by the project owner. For more information about using or contributing to this project, please contact the project owner.
