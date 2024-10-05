@@ -41,10 +41,15 @@ This backend server handles API requests for the YouTube Summarizer App. It incl
    pip install yt-dlp
    ```
 
-6. Create a `.env` file in the backend directory with your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_api_key_here
-   ```
+6. Set up your OpenAI API key:
+   - Go to https://platform.openai.com/signup to create an OpenAI account if you don't have one.
+   - Once logged in, navigate to https://platform.openai.com/api-keys
+   - Click on "Create new secret key" and copy the generated key.
+   - Create a `.env` file in the backend directory and add your API key:
+     ```
+     OPENAI_API_KEY=your_api_key_here
+     ```
+   - Note: OpenAI API usage is not free. Ensure you've set up billing in your OpenAI account settings.
 
 ## Running the Server
 1. Ensure you're in the backend directory and the virtual environment is activated.
@@ -71,12 +76,18 @@ This backend server handles API requests for the YouTube Summarizer App. It incl
 - Make sure your OpenAI API key is correctly set in the `.env` file.
 - Verify that your Python virtual environment is activated when running the server.
 - If you encounter CORS issues, check that the `corsOptions` in `server.ts` match your frontend URL.
+- Ensure that your OpenAI account has billing set up and sufficient credits.
 
 ## Development
-- To run the server in development mode with auto-reloading:
-  ```bash
-  npm run dev
-  ```
-  (Make sure you have `ts-node` installed: `npm install -D ts-node`)
+For development, use the following process:
+1. Compile TypeScript:
+   ```bash
+   npx tsc
+   ```
+2. Start the server:
+   ```bash
+   node server.js
+   ```
+3. After making changes to TypeScript files, recompile and restart the server.
 
-For more detailed project setup and running instructions, refer to the main README in the project root.
+For any other issues or questions, please open an issue in the project repository.
