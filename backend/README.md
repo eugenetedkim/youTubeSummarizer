@@ -1,53 +1,82 @@
 # Backend Server for YouTube Summarizer App
 
 ## Description
-This backend server handles API requests for the YouTube Summarizer App. It includes a route for handling the YouTube audio download, performing speech recognition, and summarizing using Chat GPT.
+This backend server handles API requests for the YouTube Summarizer App. It includes functionality for YouTube audio download, speech recognition using Whisper, and summarization using GPT-4.
 
-## Installation
-Clone the repository and run:
-```bash
-npm install
-npx tsc
-node server.js
-```
+## Prerequisites
+- Node.js (v14 or later)
+- Python 3.9 or later
+- OpenAI API key
+- `yt-dlp` (for YouTube video download)
+
+## Installation and Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install Node.js dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create and activate a Python virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+4. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. Install yt-dlp:
+   ```bash
+   # For macOS
+   brew install yt-dlp
+   # For Ubuntu/Linux
+   sudo apt update && sudo apt install yt-dlp
+   # For Windows (using pip)
+   pip install yt-dlp
+   ```
+
+6. Create a `.env` file in the backend directory with your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
+
+## Running the Server
+1. Ensure you're in the backend directory and the virtual environment is activated.
+2. Compile TypeScript:
+   ```bash
+   npx tsc
+   ```
+3. Start the server:
+   ```bash
+   node server.js
+   ```
+
+## API Endpoints
+- `POST /api/submit`: Accepts a YouTube URL, downloads the audio, transcribes it, and returns a summary.
 
 ## Notes
-Use the Whisper model by OpenAI to convert an audio file downloaded with `youtube-dl` into text. `youtube-dl` is a powerful, open-source command-line tool that allows yout o download videos from YouTube and many other video hosting sites. Whisper is a robust, state-of-the-art automatic speech recognition (ASR) system that can handle various audio inputs and languages to generate transcriptions.
+- This server uses `yt-dlp` to download audio from YouTube videos.
+- Whisper, an OpenAI model, is used for speech recognition.
+- GPT-4 is used for summarization.
+- The server expects the frontend to be running on `http://localhost:3000`.
 
-### Step 1: Install youtube-dl
-```bash
-# For macOS
-brew install youtube-dl
+## Troubleshooting
+- If you encounter issues with `yt-dlp`, ensure it's installed and up-to-date.
+- Make sure your OpenAI API key is correctly set in the `.env` file.
+- Verify that your Python virtual environment is activated when running the server.
+- If you encounter CORS issues, check that the `corsOptions` in `server.ts` match your frontend URL.
 
-# For Ubuntu/Linux
-sudo apt update
-sudo apt install youtube-dl
-```
+## Development
+- To run the server in development mode with auto-reloading:
+  ```bash
+  npm run dev
+  ```
+  (Make sure you have `ts-node` installed: `npm install -D ts-node`)
 
-### Step 2: Download Audio with youtube-dl
-Use `youtube-dl` to download the audio from a YouTube video. You can specify the format to be an audio-only format like mp3 or best audio format available:
-```bash
-youtube-dl --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" <YouTube-Video-URL>
-```
-
-I did the above but got a HTTP Error 403: Forbidden. Therefore, I installed `yt-dlp` which is a fork of `youtube-dl` that is often more up-to-date with fixes for YouTube downloading:
-```bash
-brew install yt-dlp
-```
-
-Then I ran this command (youtube-dl was replaced with yt-dlp and everything remains the same):
-```bash
-yt-dlp --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" 'https://www.youtube.com/watch?v=AsSn-QQwzao'
-```
-
-After it downloaded, the mp3 file was there in the same directory I executed the command and I was able to play it. =D
-
-Now I want to do it again, but from my backend Express app...which worked successfully.
-
-Now I want to convert the mp3 file to text....
-
-
-## Using the Audio API from OpenAI
-
-
-
+For more detailed project setup and running instructions, refer to the main README in the project root.
