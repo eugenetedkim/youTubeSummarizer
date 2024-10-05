@@ -8,6 +8,7 @@ This backend server handles API requests for the YouTube Summarizer App. It incl
 - Python 3.9 or later
 - OpenAI API key
 - `yt-dlp` (for YouTube video download)
+- Whisper (OpenAI's speech recognition model)
 
 ## Installation and Setup
 1. Navigate to the backend directory:
