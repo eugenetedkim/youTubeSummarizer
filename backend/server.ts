@@ -4,7 +4,6 @@ import { exec } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 import { spawn } from 'child_process';
-import os from 'os';
 require('dotenv').config();
 import OpenAI from 'openai';
 
@@ -26,15 +25,18 @@ if (!fs.existsSync(downloadsDir)) {
 
 // Function to get the path to the virtual environment's Python interpreter
 function getVenvPythonPath(): string {
-  const homeDir = os.homedir();
-  const venvPath = path.join(homeDir, 'whisper_venv');
+  const venvPath = path.join(__dirname, 'venv');
   const isWindows = process.platform === 'win32';
   const pythonPath = isWindows
     ? path.join(venvPath, 'Scripts', 'python.exe')
     : path.join(venvPath, 'bin', 'python');
   
   if (!fs.existsSync(pythonPath)) {
-    throw new Error(`Virtual environment Python not found at ${pythonPath}`);
+    console.error(`Virtual environment Python not found at ${pythonPath}`);
+    console.error('Please create a virtual environment by running:');
+    console.error('python3 -m venv venv');
+    console.error('Then activate it and install the required packages.');
+    process.exit(1);
   }
   
   return pythonPath;

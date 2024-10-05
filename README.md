@@ -4,14 +4,14 @@ This project is a YouTube video summarizer that transcribes and summarizes YouTu
 
 ## Project Structure
 
-- `backend/`: Contains the Node.js/Express server code
+- `backend/`: Contains the Node.js/Express server code and Python virtual environment
 - `frontend/`: Contains the React frontend code
 - `setup/`: Contains setup scripts for Mac and Windows
 
 ## Prerequisites
 
 - Node.js (v14 or later)
-- Python 3.9
+- Python 3.9 or later
 - Git
 
 ## Setup Instructions
@@ -22,30 +22,29 @@ This project is a YouTube video summarizer that transcribes and summarizes YouTu
    cd youTubeSummarizer
    ```
 
-2. Run the appropriate setup script for your operating system:
-
-   For Mac:
-   ```
-   chmod +x setup/mac_setup.sh
-   ./setup/mac_setup.sh
-   ```
-
-   For Windows (run in Command Prompt as Administrator):
-   ```
-   setup\windows_setup.bat
-   ```
-
-3. Set up the backend:
+2. Set up the backend:
    ```
    cd backend
    npm install
-   npx tsc
    ```
 
-4. Set up the frontend:
+3. Create and activate a Python virtual environment:
+   
+   For Mac/Linux:
    ```
-   cd ../frontend
-   npm install
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+   
+   For Windows:
+   ```
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+
+4. Install Python dependencies:
+   ```
+   pip install -r requirements.txt
    ```
 
 5. Create a `.env` file in the `backend` directory with your OpenAI API key:
@@ -53,12 +52,19 @@ This project is a YouTube video summarizer that transcribes and summarizes YouTu
    OPENAI_API_KEY=your_api_key_here
    ```
 
+6. Set up the frontend:
+   ```
+   cd ../frontend
+   npm install
+   ```
+
 ## Running the Application
 
 1. Start the backend server:
    ```
    cd backend
-   node server.js
+   npm run build
+   npm start
    ```
 
 2. In a new terminal, start the frontend development server:

@@ -18,7 +18,6 @@ const child_process_1 = require("child_process");
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const child_process_2 = require("child_process");
-const os_1 = __importDefault(require("os"));
 require('dotenv').config();
 const openai_1 = __importDefault(require("openai"));
 const app = (0, express_1.default)();
@@ -36,14 +35,17 @@ if (!fs_1.default.existsSync(downloadsDir)) {
 }
 // Function to get the path to the virtual environment's Python interpreter
 function getVenvPythonPath() {
-    const homeDir = os_1.default.homedir();
-    const venvPath = path_1.default.join(homeDir, 'whisper_venv');
+    const venvPath = path_1.default.join(__dirname, 'venv');
     const isWindows = process.platform === 'win32';
     const pythonPath = isWindows
         ? path_1.default.join(venvPath, 'Scripts', 'python.exe')
         : path_1.default.join(venvPath, 'bin', 'python');
     if (!fs_1.default.existsSync(pythonPath)) {
-        throw new Error(`Virtual environment Python not found at ${pythonPath}`);
+        console.error(`Virtual environment Python not found at ${pythonPath}`);
+        console.error('Please create a virtual environment by running:');
+        console.error('python3 -m venv venv');
+        console.error('Then activate it and install the required packages.');
+        process.exit(1);
     }
     return pythonPath;
 }

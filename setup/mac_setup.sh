@@ -9,21 +9,38 @@ else
     echo "Homebrew is already installed."
 fi
 
-# Install Python 3.9
-echo "Installing Python 3.9..."
-brew install python@3.9
+# Install Python 3.9 (or latest)
+echo "Installing Python..."
+brew install python
+
+# Navigate to the backend directory
+cd backend
 
 # Create virtual environment
 echo "Creating virtual environment..."
-python3.9 -m venv ~/whisper_venv
+python3 -m venv venv
 
 # Activate virtual environment
-source ~/whisper_venv/bin/activate
+source venv/bin/activate
 
 # Upgrade pip and install required packages
 echo "Installing required packages..."
 pip install --upgrade pip
-pip install openai-whisper yt-dlp
+pip install -r requirements.txt
 
-echo "Setup completed successfully!"
-echo "To activate the virtual environment, run: source ~/whisper_venv/bin/activate"
+# Install Node.js dependencies
+echo "Installing Node.js dependencies..."
+npm install
+
+echo "Backend setup completed successfully!"
+echo "To activate the virtual environment, run: source backend/venv/bin/activate"
+
+# Navigate to the frontend directory
+cd ../frontend
+
+# Install frontend dependencies
+echo "Installing frontend dependencies..."
+npm install
+
+echo "Frontend setup completed successfully!"
+echo "Setup process complete. Please set up your .env file in the backend directory."
